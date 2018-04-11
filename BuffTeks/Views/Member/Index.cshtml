@@ -1,0 +1,75 @@
+@model BuffTeks.Models.MemberMajorViewModel
+
+@{
+    ViewData["Title"] = "Join";
+}
+
+<h2>Join BuffTeks</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary btn-primary">Join Here</a>
+</p>
+<form asp-controller="Member" asp-action="Index" method="get">
+    <p>
+        <select asp-for="MemberMajor" asp-items="Model.major">
+            <option value="">All</option>
+        </select>
+
+        First Name: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.members[0].StudentID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.members[0].FName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.members[0].LName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.members[0].Major)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.members[0].PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.members[0].Email)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.members) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Major)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
